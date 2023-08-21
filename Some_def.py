@@ -1,7 +1,5 @@
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
-from typing import Optional
 from slqite import User
 
 def check_user_id(user_id: int, _session) -> bool:

@@ -1,8 +1,6 @@
-import sqlite3
-import sqlalchemy
-import os.path
+
 import random
-from sqlalchemy import MetaData, Table, String, Integer, Column, Text, DateTime, Boolean, ForeignKey
+from sqlalchemy import ForeignKey
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import declarative_base, relationship
@@ -112,7 +110,7 @@ def get_clothes(session, id, temp):
             Clothes.type.in_(['футболка','рубашка','платье']), Clothes.user_id == id).all()
     else:
         clothes_type1 = session.query(Clothes).filter(
-            Clothes.type.in_(['свитер']), Clothes.user_id == id).all()
+            Clothes.type.in_(['свитер','сумка']), Clothes.user_id == id).all()
     if clothes_type1 and clothes_type2:
         random_clothes1 = random.choice(clothes_type1)
         random_clothes2 = random.choice(clothes_type2)

@@ -1,34 +1,24 @@
 import io
 import requests
-import sqlalchemy
 import Data
 import Class_keyboard
 import telebot
 import asyncio
 import slqite
 import Some_def
-import pyowm
-import Class_enumeration
 import Models_TF
-import tensorflow as tf
-from slqite import User, Clothes
+from slqite import User
 from PIL import Image
-from tensorflow.keras.models import load_model
 from Class_enumeration import enumeration
 from telebot import types
-from sqlalchemy import MetaData
 from sqlalchemy.orm import sessionmaker
 from pyowm.commons.exceptions import NotFoundError
-from io import BufferedWriter, FileIO
+
 
 
 bot = telebot.TeleBot(Data.token_to_api)
 gender = ''
 
-#Bugs
-#1) Обратка шага назад, дает 3 шага назад.
-#2) Нужно разделить метод смены пола, на регистрацию и на изменение
-#3) Изменение пола и города, должны записывать новые значения в бд
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -224,7 +214,6 @@ def callback_add_or_prep(call):
         elif call.data == 'new_data':
             keyboard = Class_keyboard.Keyboard()
             keyboard.add_button('Город', 'city')
-            keyboard.add_button('Пол', 'gender')
             bot.send_message(call.message.chat.id, 'Что вы хотите изменить?', reply_markup=keyboard.get_keyboard())
             Data.actual_status = enumeration.wait_button
             del keyboard
